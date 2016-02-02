@@ -44,7 +44,7 @@ function test_input($data) {
 <link href="../css/styles.css" rel="stylesheet" type="text/css">
  <link href="../css/animate.css" rel="stylesheet" type="text/css">
  <link rel="stylesheet" href="../css/css3buttons.css" media="screen"> 
- 
+ <link rel="shortcut icon" href="../images/icon.ico">
 </head>
 
 <body>
