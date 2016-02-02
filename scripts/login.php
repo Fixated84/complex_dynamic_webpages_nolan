@@ -3,7 +3,7 @@ $message = "<p></p>";
 
 if($_POST) {
 
-$username = $_POST['username'];
+$username = test_input($_POST['username']);
 $password = md5($_POST['password']);
 
 
@@ -25,7 +25,12 @@ header('location:admin.php');
  
    }
    
-
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
  
  ?>
 

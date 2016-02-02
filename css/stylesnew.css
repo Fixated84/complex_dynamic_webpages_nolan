@@ -1326,7 +1326,7 @@ html , body {
 background:#159;
 background-color: 159  ;
 
-text-align:center;
+ /* removed text-align : centre;*/
 background-image:
 linear-gradient(-40deg,#222,transparent,#111), 
 linear-gradient(40deg,#222,transparent,#111), 
