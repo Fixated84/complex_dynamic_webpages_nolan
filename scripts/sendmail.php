@@ -165,6 +165,22 @@ window.onload = function(){
  
 };
  </script>
+ 
+  <script type="text/javascript">
+// window.onload = function(){
+ var day = new Date();
+  var hr = day.getHours();
+  if ((hr == 18) ||(hr == 19) || (hr == 20) || (hr == 21) || (hr == 22) || (hr == 23)|| (hr == 0)|| (hr == 1)|| (hr == 2)|| (hr == 3)|| (hr == 4)|| (hr == 5)|| (hr == 6)    ) {
+ 
+ var cssnew = document.querySelector("link[href='../css/styles.css']");
+ 
+ cssnew.setAttribute("href", "../css/stylesnew.css");
+ 
+ 
+ }
+  
+ 
+ </script>
 
 </body>
 </html>

@@ -45,6 +45,7 @@ header('Location:login.php');
 <body>
 <div class="wrapper">
 <!--<header>-->
+
 	 <div class="headerwrapper">
 		 <div class="leftheader"><img id="effectimg"  class="displayed" src="../images/logo.png"   alt="AllStyle Homes Logo"></div>
          <div class="rightheader">
@@ -165,7 +166,8 @@ echo "<td> <input type=\"checkbox\" class=\"remove\" name=\"remove[]\" value=\"\
  
 <!--</section>-->
 </div>
-<script>
+
+ <script>
  
 var effectimg = document.getElementById("effectimg");
  
@@ -185,9 +187,11 @@ window.onload = function(){
  
 };
  </script>
- 
  <script type='text/javascript'>//<![CDATA[ 
 window.onload=function(){
+	
+	
+	
 var btns = document.querySelectorAll('.remove'),
     phone = document.querySelector('.phone');
 
@@ -215,6 +219,24 @@ var extension = ".php?email=";
 document.something.action=initial+extension+url;
 }
 </SCRIPT>
+
+ <script type="text/javascript">
+// window.onload = function(){
+ var day = new Date();
+  var hr = day.getHours();
+  if ((hr == 18) ||(hr == 19) || (hr == 20) || (hr == 21) || (hr == 22) || (hr == 23)|| (hr == 0)|| (hr == 1)|| (hr == 2)|| (hr == 3)|| (hr == 4)|| (hr == 5)|| (hr == 6)    ) {
+ 
+ var cssnew = document.querySelector("link[href='../css/styles.css']");
+ 
+ cssnew.setAttribute("href", "../css/stylesnew.css");
+ 
+ 
+ }
+  
+ 
+ </script>
+ 
+ 
 
 </body>
 </html>
