@@ -1,4 +1,19 @@
 @charset "UTF-8";
+.green{
+	text-align:center;
+	margin:auto;
+	color:green;
+	
+ 
+}
+
+.red{
+	text-align:center;
+	margin:auto;
+	color:red;
+	
+ 
+}
 
 /*=========== login style===========*/
 *,

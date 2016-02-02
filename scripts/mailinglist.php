@@ -1,15 +1,114 @@
 <?php
 $message = "<br><p></p><br>";
+ $firstnameErr = $lastnameErr = $emailErr = $error = $error1 = "<br><p></p><br>";
  
-include("connect.php");
-/*$firstname = (isset($_POST['firstname']) ? $_POST['firstname'] : null);*/
+ 
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ 	 
+if (empty($_POST["firstname"])) {
+	$firstname = "";
+$firstnameErr = "<p class=\"animated bounce red\">First Name is Required.</p>";
+ 
+$error = true;
+ 
+}else{ 
+
+$firstname = test_input($_POST["firstname"]);
+if (!preg_match("/^[a-zA-Z]*$/",$firstname)) {
+      $firstnameErr = "<p class=\"animated bounce red\">Only letters</p>"; 
+      $error = true;
+	  
+	 
+} else {
+	
+$error = false;	
+}
+}
+
+ if (empty($_POST["lastname"])) {
+	$lastname = "";
+$lastnameErr = "<p class=\"animated bounce red\">Last Name is Required</p>";
+$error = true;
+ 
+} else {
+
+
+$lastname = test_input($_POST["lastname"]);	
+if (!preg_match("/^[a-zA-Z]*$/",$lastname)) {
+      $lastnameErr = "<p class=\"animated bounce red\">Only letters</p>"; 
+      $error = true;
+	 
+}else {
+	
+$error = false;	
+}
+} 
+
+ if (empty($_POST["email"])) {
+	$email = "";
+$emailErr = "<p class=\"animated bounce red\">Email is Required</p>";
+$error = true;
+
+ 
+} else {
+
+
+$email = test_input($_POST["email"]);	
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "<p class=\"animated bounce red\">Invalid email format</p>"; 
+      $error = true;
+ 
+}else {
+	
+$error = false;	
+}
+} 
+
+ }
+ if (!$error) {
+ 
+
+ include("connect.php");
+ 
+$queryadd = "INSERT INTO emaillist (`user_ID`, `firstname` ,`lastname`,`email`)
+VALUES (NULL, '$firstname', '$lastname','$email')";
+
+$updatedb = mysqli_query($con,$queryadd);
+
+  mysqli_close($con);
+
+ if ($updatedb) {
+ $message = "<br><p class=\"animated bounce green\">You have been successfully added to the mailing list.</p>" ;
+
+ }else{
+   $message = "<br><p class=\"animated bounce red\"> Your information could not be added to the mailing list.</p>";
+
+} 
+ 
+
+ }  
+  
+
+  function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+ 
+ }  
+ 
+ 
+ /*include("connect.php");
  if($_POST) {
  
  
  $firstname = $_POST['firstname']; 
- $lastname = $_POST['lastname'];
+  
+ 
+  $lastname = $_POST['firstname']; 
+ 
  $email = $_POST['email'];
-
+  
  
  
 $queryadd = "INSERT INTO emaillist (user_ID, firstname, lastname, email)
@@ -19,13 +118,19 @@ $updatedb = mysqli_query($con,$queryadd);
  mysqli_close($con);
 
 if ($updatedb) {
- $message = "<br><p class=\"animated bounce\">You have been successfully added to the mailing list.</p>" ;
+ $message = "<br><p class=\"animated bounce green\">You have been successfully added to the mailing list.</p>" ;
 
  }else{
-   $message = "<br><p> Your information could not be added to the mailing list.</p>";
+   $message = "<br><p class=\"animated bounce red\"> Your information could not be added to the mailing list.</p>";
 
  }
-}
+}*/
+ 
+ 
+
+
+
+
 ?>
 
 
@@ -84,15 +189,15 @@ if ($updatedb) {
    
     <label>
       First Name
-      <input  type="text"  name="firstname" placeholder="First Name" required> 
+      <input  type="text"  name="firstname" placeholder="First Name" value="<?php if (isset($_POST['firstname'])) echo htmlentities($_POST['firstname']); ?>"> 
     </label>
     <label>
       Last Name
-    <input  type="text"  name="lastname" placeholder="Last Name" required>
+    <input  type="text"  name="lastname" placeholder="Last Name" value="<?php if (isset($_POST['lastname'])) echo htmlentities($_POST['lastname']); ?>">
      </label>
          <label>
-      Last Name
-    <input type="text"  name="email" placeholder="Email" required >
+      Email
+    <input type="text"  name="email" placeholder="Email" value="<?php if (isset($_POST['email'])) echo htmlentities($_POST['email']); ?>">
      </label>
      
   </fieldset>
@@ -103,9 +208,17 @@ if ($updatedb) {
   <input type="button" value="Login"  onClick="window.location.href='admin.php'" class="btn right">
      
   </fieldset>
+  
+  
 </form>
+ 
 <?php
-echo  $message;
+ 
+ // shows errors
+  
+	 echo $message;
+ echo $firstnameErr .  $lastnameErr . $emailErr;
+  
 ?>
  
 
